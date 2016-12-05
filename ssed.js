@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const readline = require('readline');
 const sse = require("sse-node");
 const app = require("express")();
