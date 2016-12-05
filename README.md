@@ -4,7 +4,7 @@ SSE deamon is a small command-line tool that turns data received on it's standar
 This makes it very easy to push data to browsers. What data to push and how to interpret it in the browser is up to you.
 
 `ssed` is inspired by [websocketd](http://websocketd.com/) but it's quite different:
- it does not wrap an existing command, it just reads messages from the standard input and push them as server sent events.
+ it does not wrap an existing command, it just reads messages from the standard input and pushes them as server sent events.
 
 # How to use it?
 
