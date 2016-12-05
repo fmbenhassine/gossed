@@ -3,11 +3,12 @@
 SSE deamon is a small command-line tool that turns data received on it's standard input into server sent events.
 This makes it very easy to push data to browsers. What data to push and how to interpret it in the browser is up to you.
 
-`ssed` is inspired by the great [websocketd](http://websocketd.com/) by [@joewalnes](https://twitter.com/joewalnes) but is quite different: it does not wrap an existing command, it just reads messages from the standard input and push them as server sent events.
+`ssed` is inspired by the great [websocketd](http://websocketd.com/) by [@joewalnes](https://twitter.com/joewalnes) but it's quite different:
+ it does not wrap an existing command, it just reads messages from the standard input and push them as server sent events.
 
 # How to use it?
 
-`ssed` requires node js. To install `ssed`, run the following commands:
+`ssed` requires node js and npm. To install `ssed`, run the following commands:
 
 ```shell
 $>git clone https://github.com/benas/ssed.git
@@ -28,7 +29,7 @@ By default, `ssed` will start a server on port 3000. You can specify a different
 
 # Example: plot some random numbers
 
-The following command writes random number to the standard output every second.
+The following command writes random numbers to the standard output every second.
 These numbers can be piped out to `ssed` and rendered in a real time chart:
 
 ```shell
@@ -63,7 +64,7 @@ write it to the standard output and pipe it out to `ssed`. Here are some example
 # Contributions
 
 You are welcome to contribute to the project with pull request on github.
-I'm really bad on web design! All I know is importing twitter bootstrap css and js files in a html file.
+I'm really bad at web design! All I know is importing twitter bootstrap css and js files in a html file.
 If you can contribute an example of dashboard with cool widgets, I'll really appreciate your help! Many thanks upfront.
 
 # License
