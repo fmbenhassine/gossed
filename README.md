@@ -5,3 +5,11 @@ This makes it very easy to push data to browsers in a generic way.
 
 `ssed` is inspired by the great [websocketd](http://websocketd.com/) by [@joewalnes](https://twitter.com/joewalnes) but is quite different: it does not wrap an existing command, it just reads messages from the standard input and push them as server sent events.
 This makes it easy to pipe data to `ssed` from any program that writes to the standard output.
+
+# Examples
+
+### Plot some random number
+
+```shell
+while sleep 2; do echo $[ ( $RANDOM % 100 )  + 1 ]; done | node index.js
+```
