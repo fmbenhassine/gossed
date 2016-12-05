@@ -56,6 +56,7 @@ As you can see, there is no need to create a server, just open the html file in 
 Now that you've got the idea, time to get your hands dirty! We can imagine any program that collects data on a regular interval,
 write it to the standard output and pipe it out to `ssed`. Here are some examples:
 
+* display live Linux system stats (memory, CPU, IO, etc) in a pretty dashboard, just like [web-vmstats](https://github.com/joewalnes/web-vmstats)
 * create a monitoring dashboard of running docker containers (cpu usage, memory consumption, etc) using [docker stats](https://docs.docker.com/engine/reference/commandline/stats/) command
 * track data from a Mysql database (or any other db): running for example `mysql -u USER -p PWD -e 'SELECT COUNT(*) FROM orders' eshop` every x seconds and make a live dashboard of it
 * monitor ElasticSearch nodes using [node stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html) command
@@ -69,7 +70,8 @@ If you can contribute an example of dashboard with cool widgets, I'll really app
 
 # Credits
 
-`ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
+*`ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
+* The random numbers example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
 
 # License
 
