@@ -1,0 +1,30 @@
+{
+  "name": "ssed",
+  "version": "0.0.1",
+  "description": "ssed pushes STDIN messages as server sent events",
+  "main": "ssed.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "sse-node": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benas/ssed.git"
+  },
+  "keywords": [
+    "sse"
+  ],
+  "author": "Mahmoud Ben Hassine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benas/ssed/issues"
+  },
+  "homepage": "https://github.com/benas/ssed#readme"
+}
