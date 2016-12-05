@@ -70,7 +70,7 @@ If you can contribute an example of dashboard with cool widgets, I'll really app
 
 # Credits
 
-*`ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
+* `ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
 * The random numbers example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
 
 # License
