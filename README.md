@@ -67,6 +67,10 @@ You are welcome to contribute to the project with pull request on github.
 I'm really bad at web design! All I know is importing twitter bootstrap css and js files in a html file.
 If you can contribute an example of dashboard with cool widgets, I'll really appreciate your help! Many thanks upfront.
 
+# Credits
+
+`ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
+
 # License
 
 `ssed` is released under the [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT).
