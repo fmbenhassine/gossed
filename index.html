@@ -4,7 +4,7 @@
     <script type="text/javascript" src="http://smoothiecharts.org/smoothie.js"></script>
     <script type="text/javascript">
         var ts = new TimeSeries();
-        var source = new EventSource("http://localhost:9000/");
+        var source = new EventSource("http://localhost:3000/");
         source.onmessage = function(event) {
             ts.append(new Date().getTime(), event.data);
         };
