@@ -27,7 +27,9 @@ You may want to add `ssed` to your PATH or make an alias for it: `alias ssed='/p
 
 By default, `ssed` will start a server on port 3000. You can specify a different port as first parameter: `node ssed.js 9000`
 
-# Example: plot some random numbers
+# Examples
+
+### Create a real time monitoring dashboard
 
 The following command writes random numbers to the standard output every second.
 These numbers can be piped out to `ssed` and rendered in a real time chart:
@@ -50,6 +52,17 @@ source.onmessage = function(event) {
 ```
 
 As you can see, there is no need to create a server, just open the html file in a browser and you're done.
+
+### Stream logs to the browser
+
+The following command will push server logs to the browser:
+
+```shell
+tail -f server.log | ssed
+```
+
+Try to run this command on a changing file in your system and open the `examples/log/index.html` file in a browser.
+You should see log events added in real time to the web page.
 
 # Use cases
 
