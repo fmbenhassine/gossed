@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous">
+    <style>
+		h1 { text-align: center; font-size: 60px; }
+		.widget { padding: 5px 5px 5px 5px; }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var source = new EventSource("http://localhost:3000/");
+        source.onmessage = function(event) {
+        	var data = JSON.parse(event.data);
+            $('.branches').text( data.branches );
+            $('.tags').text( data.tags );
+            $('.reverts').text( data.reverts );
+        };
+    </script>
+</head>
+<body>
+<div class="row">
+    <h1>Git dashboard</h1>
+</div>
+<div class="row">
+    <div class="container">
+        <div class="col-md-4">
+            <div class="widget bg-success">
+                <h1><i class="fa fa-code-fork" aria-hidden="true"></i> branches</h1>
+                <h1 class="branches">3</h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget bg-info">
+                <h1><i class="fa fa-tags" aria-hidden="true"></i> tags</h1>
+                <h1 class="tags">7</h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget bg-danger">
+                <h1><i class="fa fa-eraser" aria-hidden="true"></i> reverts</h1>
+                <h1 class="reverts">12</h1>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

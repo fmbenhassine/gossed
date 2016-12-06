@@ -37,7 +37,7 @@ while sleep 1; do echo $[ ( $RANDOM % 100 )  + 1 ]; done | ssed
 
 Run this command and open the `examples/random/index.html` file in a browser. You should see a chart with live data:
 
-![screenshot](https://raw.githubusercontent.com/benas/ssed/master/examples/random/screenshot.png)
+![screenshot-random](https://raw.githubusercontent.com/benas/ssed/master/examples/random/screenshot.png)
 
 On the client side, we need to listen to server sent events and update the chart:
 
@@ -49,6 +49,45 @@ source.onmessage = function(event) {
 ```
 
 As you can see, there is no need to create a server, just open the html file in a browser and you're done.
+
+### Git statistics dashboard
+
+The following script (in `examples/git/git-stats.sh`) gathers statistics for a given git repository:
+
+```shell
+#!/bin/bash
+
+FOLDER=$1
+cd ${FOLDER}
+
+BRANCHES=$(git branch -a | wc -l);
+TAGS=$(git tag -l | wc -l);
+REVERTS=$(git log --oneline | grep 'revert' | wc -l);
+
+echo "{\"branches\": \"$BRANCHES\", \"tags\": \"$TAGS\", \"reverts\": \"$REVERTS\"}";
+```
+
+Stats are written to the standard output in JSON format. Let's pipe this out to `ssed`:
+
+```shell
+while sleep 5; do git-stats.sh /Users/benas/dev/projects/github/ssed/; done | ssed
+```
+
+We can now consume these stats in a web page:
+
+```js
+var source = new EventSource("http://localhost:3000/");
+source.onmessage = function(event) {
+    var data = JSON.parse(event.data);
+    $('.branches').text( data.branches );
+    $('.tags').text( data.tags );
+    $('.reverts').text( data.reverts );
+};
+```
+
+This snippet from `examples/git/index.html` will parse data and show it in the following dashboard:
+
+![screenshot-git](https://raw.githubusercontent.com/benas/ssed/master/examples/git/screenshot.png)
 
 ### Stream logs to the browser
 
