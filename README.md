@@ -3,9 +3,6 @@
 SSE deamon is a small command-line tool that turns data received on it's standard input into server sent events.
 This makes it very easy to push data to browsers. What data to push and how to interpret it in the browser is up to you.
 
-`ssed` is inspired by [websocketd](http://websocketd.com/) but it's quite different:
- it does not wrap an existing command, it just reads messages from the standard input and pushes them as server sent events.
-
 # How to use it?
 
 `ssed` requires node js and npm. To install `ssed`, run the following commands:
@@ -83,6 +80,7 @@ If you can contribute an example of dashboard with cool widgets, I'll really app
 
 # Credits
 
+* `ssed` is inspired by [websocketd](http://websocketd.com/)
 * `ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
 * The random numbers example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
 
