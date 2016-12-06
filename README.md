@@ -16,7 +16,7 @@ $>npm install
 You can run `ssed` using `node ssed.js` or by making `ssed.js` executable:
 
 ```shell
-$>chmode +x ssed.js
+$>chmod +x ssed.js
 $>./ssed.js
 ```
 
