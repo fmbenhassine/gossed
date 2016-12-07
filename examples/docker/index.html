@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var source = new EventSource("http://localhost:3000/");
+        source.onmessage = function(event) {
+        	var data = JSON.parse(event.data);
+            $('.images').text( data.images );
+            $('.running').text( data.running );
+            $('.stopped').text( data.stopped );
+        };
+    </script>
+
+</head>
+<body>
+<div class="row">
+    <div class="container">
+        <h1 class="c-white">Docker dashboard</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <div class="col-md-4">
+            <div class="widget">
+                <h1 class="c-white"><i class="fa fa-tags" aria-hidden="true"></i> Images</h1>
+                <h1 class="images c-orange"></h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget">
+                <h1 class="c-white"><i class="fa fa-play" aria-hidden="true"></i> Running containers</h1>
+                <h1 class="running c-green"></h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget">
+                <h1 class="c-white"><i class="fa fa-stop" aria-hidden="true"></i> Stopped containers</h1>
+                <h1 class="stopped c-blue"></h1>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

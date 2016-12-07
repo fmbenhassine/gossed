@@ -50,8 +50,45 @@ source.onmessage = function(event) {
 
 As you can see, there is no need to create a server, just open the html file in a browser and you're done.
 
+### Docker dashboard
+
+The following script (in `examples/docker/docker-stats.sh`) gathers some statistics about docker:
+
+```shell
+#!/bin/bash
+
+IMAGES=$(docker images | wc -l);
+RUNNING=$(docker ps --filter status=running | wc -l);
+STOPPED=$(docker ps --filter status=exited | wc -l);
+
+echo "{\"images\": \"$IMAGES\", \"running\": \"$RUNNING\", \"stopped\": \"$STOPPED\"}";
+```
+
+Stats are written to the standard output in JSON format. Let's pipe them out to `ssed`:
+
+```shell
+while sleep 10; do docker-stats.sh ; done | ssed
+```
+
+We can now consume these stats in a web page:
+
+```js
+var source = new EventSource("http://localhost:3000/");
+source.onmessage = function(event) {
+    var data = JSON.parse(event.data);
+    $('.images').text( data.images );
+    $('.running').text( data.running );
+    $('.stopped').text( data.stopped );
+};
+```
+
+This snippet from `examples/docker/index.html` will parse data and show it in the following dashboard:
+
+![screenshot-docker](https://raw.githubusercontent.com/benas/ssed/master/examples/docker/screenshot.png)
+
 ### Git statistics dashboard
 
+This example is the same idea as docker dashboard, but for git.
 The following script (in `examples/git/git-stats.sh`) gathers statistics from a git repository:
 
 ```shell
@@ -67,13 +104,13 @@ REVERTS=$(git log --oneline | grep 'revert' | wc -l);
 echo "{\"branches\": \"$BRANCHES\", \"tags\": \"$TAGS\", \"reverts\": \"$REVERTS\"}";
 ```
 
-Stats are written to the standard output in JSON format. Let's pipe this out to `ssed`:
+Stats are written to the standard output in JSON format and piped out to `ssed`:
 
 ```shell
 while sleep 5; do git-stats.sh /Users/benas/dev/projects/github/ssed/; done | ssed
 ```
 
-We can now consume these stats in a web page:
+Reporting data is then consumed in a web page:
 
 ```js
 var source = new EventSource("http://localhost:3000/");
@@ -104,7 +141,7 @@ The following command will push server logs to the browser:
 tail -f server.log | ssed
 ```
 
-Cool! we just implemented [logio](http://logio.org/) :smile:
+Cool! we've just implemented [logio](http://logio.org/) :smile:
 
 Try to run this command on a changing file in your system and open the `examples/log/index.html` file in a browser.
 You should see log events added in real time to the web page.
@@ -115,9 +152,10 @@ Now that you've got the idea, time to get your hands dirty! We can imagine any p
 write it to the standard output and pipe it out to `ssed`. Here are some ideas:
 
 * display live Linux system stats (memory, CPU, IO, etc) in a pretty dashboard, just like [web-vmstats](https://github.com/joewalnes/web-vmstats)
-* create a monitoring dashboard of running docker containers (cpu usage, memory consumption, etc) using [docker stats](https://docs.docker.com/engine/reference/commandline/stats/) command
-* track data from a Mysql database (or any other db): running for example `mysql -u USER -p PWD -e 'SELECT COUNT(*) FROM orders' eshop` every x seconds and make a live dashboard of it
-* monitor ElasticSearch nodes using [node stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html) command
+* track data from a database: running for example `mysql -e 'SELECT COUNT(*) FROM orders'` every few minutes and make a live dashboard of it
+* monitor Docker using [docker stats](https://docs.docker.com/engine/reference/commandline/stats/)
+* monitor ElasticSearch using [node stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
+* monitor MongoDB server using [mongo stats](https://docs.mongodb.com/v3.2/reference/method/db.stats/)
 * etc
 
 Your imagination is the limit!
