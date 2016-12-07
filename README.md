@@ -52,7 +52,7 @@ As you can see, there is no need to create a server, just open the html file in 
 
 ### Git statistics dashboard
 
-The following script (in `examples/git/git-stats.sh`) gathers statistics for a given git repository:
+The following script (in `examples/git/git-stats.sh`) gathers statistics from a git repository:
 
 ```shell
 #!/bin/bash
@@ -89,6 +89,13 @@ This snippet from `examples/git/index.html` will parse data and show it in the f
 
 ![screenshot-git](https://raw.githubusercontent.com/benas/ssed/master/examples/git/screenshot.png)
 
+These stats are probably not relevant and used here just for demonstration purpose. But we can imagine a dashboard for a team with:
+
+* current features and bug-fixes branches (based on name pattern)
+* who is working on each branch
+* a live chart with git activities (last commits, branch creation/deletion, ..)
+* etc
+
 ### Stream logs to the browser
 
 The following command will push server logs to the browser:
@@ -97,19 +104,23 @@ The following command will push server logs to the browser:
 tail -f server.log | ssed
 ```
 
+Cool! we just implemented [logio](http://logio.org/) :smile:
+
 Try to run this command on a changing file in your system and open the `examples/log/index.html` file in a browser.
 You should see log events added in real time to the web page.
 
 # Use cases
 
 Now that you've got the idea, time to get your hands dirty! We can imagine any program that collects data on a regular interval,
-write it to the standard output and pipe it out to `ssed`. Here are some examples:
+write it to the standard output and pipe it out to `ssed`. Here are some ideas:
 
 * display live Linux system stats (memory, CPU, IO, etc) in a pretty dashboard, just like [web-vmstats](https://github.com/joewalnes/web-vmstats)
 * create a monitoring dashboard of running docker containers (cpu usage, memory consumption, etc) using [docker stats](https://docs.docker.com/engine/reference/commandline/stats/) command
 * track data from a Mysql database (or any other db): running for example `mysql -u USER -p PWD -e 'SELECT COUNT(*) FROM orders' eshop` every x seconds and make a live dashboard of it
 * monitor ElasticSearch nodes using [node stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html) command
 * etc
+
+Your imagination is the limit!
 
 # Contributions
 
