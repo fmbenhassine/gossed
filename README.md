@@ -48,7 +48,9 @@ source.onmessage = function(event) {
 };
 ```
 
-As you can see, there is no need to create a server, just open the html file in a browser and you're done.
+As you can see, there is no need to create a server, just open the html file in a browser and you're done!
+
+In the example above, replace `echo $[ ( $RANDOM % 100 )  + 1 ]` with `cat /proc/meminfo | grep MemFree | awk '{print $2}'` (or something similar using `top` or `free` commands) and you'll get a live chart of memory usage.
 
 ### Docker dashboard
 
