@@ -32,5 +32,4 @@ app.get("/", (req, res) => {
     });
 });
 
-// TODO use commander to parse port: node index.js --port=9000
 app.listen(process.argv[2] || 3000);
