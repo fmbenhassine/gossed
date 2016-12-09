@@ -1,6 +1,6 @@
 # About ssed
 
-SSE deamon is a small command-line tool that turns data received on it's standard input into server sent events.
+SSE daemon is a small command-line tool that turns data received on it's standard input into server sent events.
 This makes it very easy to push data to browsers. What data to push and how to interpret it in the browser is up to you.
 
 # How to use it?
