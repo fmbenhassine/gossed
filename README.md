@@ -49,6 +49,49 @@ $>npm install
 
 # Examples
 
+In the following examples, we assume you have `ssed` command either:
+
+* in your PATH environment variable
+* or as an alias for `node ssed.js`
+* or as an alias for `docker run -i -p 3000:3000 benas/ssed`
+
+### Hello world
+
+`ssed` reads messages from STDIN and push them as server sent events. So let's first start a `ssed` process:
+
+```shell
+$>ssed
+```
+
+Now, every message written to the console will be pushed as a server sent event (on port 3000 by default, but you can change if you want).
+Here is a html page to consume these events:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        var source = new EventSource("http://localhost:3000/");
+        source.onmessage = function(event) {
+            var content = document.getElementById('content');
+            content.innerHTML = content.innerHTML + event.data + '<br/>';
+        };
+    </script>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+</html>
+```
+
+This file (in `examples/helloworld/index.html`) will print each event to the page content.
+Open this file in a browser and type some messages to the console, you should see them in the web page:
+
+![screenshot-helloworld](https://raw.githubusercontent.com/benas/ssed/master/examples/helloworld/screenshot.png)
+
+This is the simplest example of how to use `ssed`, not really useful, but just to help you understand how it works.
+Let see some other useful examples.
+
 ### Create a real time monitoring dashboard
 
 The following command writes random numbers to the standard output every second.
