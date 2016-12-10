@@ -77,7 +77,7 @@ In the example above, replace `echo $[ ( $RANDOM % 100 )  + 1 ]` with `cat /proc
 
 ### Docker dashboard
 
-The following script (in `examples/docker/docker-stats.sh`) gathers some statistics about docker:
+The following script (in `examples/docker/docker-stats.sh`) gathers some statistics about docker engine:
 
 ```shell
 #!/bin/bash
@@ -173,7 +173,7 @@ You should see log events added in real time to the web page.
 
 # Use cases
 
-Now that you've got the idea, time to get your hands dirty! We can imagine any program that collects data on a regular interval,
+Now that you've got the idea, time to get your hands dirty! We can imagine any program _in any language_ that collects data on a regular interval,
 write it to the standard output and pipe it out to `ssed`. Here are some ideas:
 
 * display live Linux system stats (memory, CPU, IO, etc) in a pretty dashboard, just like [web-vmstats](https://github.com/joewalnes/web-vmstats)
