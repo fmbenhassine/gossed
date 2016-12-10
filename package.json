@@ -19,12 +19,12 @@
     "url": "git+https://github.com/benas/ssed.git"
   },
   "keywords": [
-    "sse"
+    "sse", "server sent event"
   ],
   "author": "Mahmoud Ben Hassine",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/benas/ssed/issues"
   },
-  "homepage": "https://github.com/benas/ssed#readme"
+  "homepage": "https://github.com/benas/ssed"
 }
