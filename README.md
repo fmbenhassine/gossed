@@ -7,17 +7,9 @@ This makes it very easy to push data to browsers. What data to push and how to i
 
 ### Using Node
 
-`ssed` requires Node.js v4+. First, [download](https://github.com/benas/ssed/releases) the latest release of `ssed` and run the following command:
+`ssed` requires Node.js v4+. First, [download](https://github.com/benas/ssed/releases) the latest release of `ssed` and run the following command: `$> node ssed.js` .
 
-```js
-node ssed.js
-```
-
-`ssed.js` is an executable script, you can also run it with:
-
-```shell
-$>./ssed.js
-```
+`ssed.js` is an executable script, you can also run it with: `$> ./ssed.js`
 
 You may want to add `ssed` to your PATH or make an alias for it: `alias ssed='/path/to/ssed.js'`
 
@@ -25,27 +17,11 @@ By default, `ssed` will start a server on port 3000. You can specify a different
 
 ### Using Docker
 
-The [benas/ssed](https://hub.docker.com/r/benas/ssed/) image contains all dependencies to run `ssed`. First, pull the image with:
+The [benas/ssed](https://hub.docker.com/r/benas/ssed/) image contains all you need to run `ssed`.
 
-```
-docker pull benas/ssed
-```
+First, pull the image: `$> docker pull benas/ssed`
 
-Then, you can start `ssed` in a docker container:
-
-```
-docker run -i -p 3000:3000 benas/ssed
-```
-
-### Build from source
-
-To build `ssed` from sources, you need `npm`. Please run the following commands:
-
-```shell
-$>git clone https://github.com/benas/ssed.git
-$>cd ssed
-$>npm install
-```
+Then, you can start `ssed` in a docker container: `$> docker run -i -p 3000:3000 benas/ssed`
 
 # Examples
 
@@ -57,10 +33,10 @@ In the following examples, we assume you have `ssed` command either:
 
 ### Hello world
 
-`ssed` reads messages from STDIN and push them as server sent events. So let's first start a `ssed` process:
+`ssed` reads messages from STDIN and pushes them as server sent events. So let's first start a `ssed` process:
 
 ```shell
-$>ssed
+$> ssed
 ```
 
 Now, every message written to the console will be pushed as a server sent event (on port 3000 by default, but you can change if you want).
@@ -85,11 +61,12 @@ Here is a html page to consume these events:
 ```
 
 This file (in `examples/helloworld/index.html`) will print each event to the page content.
-Open this file in a browser and type some messages to the console, you should see them in the web page:
+Open this file in a browser and type some messages in the console, you should see them in the web page:
 
 ![screenshot-helloworld](https://raw.githubusercontent.com/benas/ssed/master/examples/helloworld/screenshot.png)
 
-This is the simplest example of how to use `ssed`, not really useful, but just to help you understand how it works.
+This is the simplest example of how to use `ssed`. It's not really useful, but just to help you understand how it works.
+
 Let see some other useful examples.
 
 ### Create a real time monitoring dashboard
@@ -98,7 +75,7 @@ The following command writes random numbers to the standard output every second.
 These numbers can be piped out to `ssed` and rendered in a real time chart:
 
 ```shell
-while sleep 1; do echo $[ ( $RANDOM % 100 )  + 1 ]; done | ssed
+$> while sleep 1; do echo $[ ( $RANDOM % 100 )  + 1 ]; done | ssed
 ```
 
 Run this command and open the `examples/random/index.html` file in a browser. You should see a chart with live data:
@@ -135,7 +112,7 @@ echo "{\"images\": \"$IMAGES\", \"running\": \"$RUNNING\", \"stopped\": \"$STOPP
 Stats are written to the standard output in JSON format. Let's pipe them out to `ssed`:
 
 ```shell
-while sleep 10; do docker-stats.sh ; done | ssed
+$> while sleep 10; do docker-stats.sh ; done | ssed
 ```
 
 We can now consume these stats in a web page:
@@ -175,7 +152,7 @@ echo "{\"branches\": \"$BRANCHES\", \"tags\": \"$TAGS\", \"reverts\": \"$REVERTS
 Stats are written to the standard output in JSON format and piped out to `ssed`:
 
 ```shell
-while sleep 5; do git-stats.sh /Users/benas/dev/projects/github/ssed/; done | ssed
+$> while sleep 5; do git-stats.sh /Users/benas/dev/projects/github/ssed/; done | ssed
 ```
 
 Reporting data is then consumed in a web page:
@@ -206,7 +183,7 @@ These stats are probably not relevant and used here just for demonstration purpo
 The following command will push server logs to the browser:
 
 ```shell
-tail -f server.log | ssed
+$> tail -f server.log | ssed
 ```
 
 Cool! we've just implemented [logio](http://logio.org/) :smile:
