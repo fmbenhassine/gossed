@@ -1,6 +1,6 @@
 {
   "name": "ssed",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ssed pushes STDIN messages as server sent events",
   "main": "ssed.js",
   "directories": {
