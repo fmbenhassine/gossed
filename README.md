@@ -5,24 +5,47 @@ This makes it very easy to push data to browsers. What data to push and how to i
 
 # How to use it?
 
-`ssed` requires node js and npm. To install `ssed`, run the following commands:
+### Using Node
 
-```shell
-$>git clone https://github.com/benas/ssed.git
-$>cd ssed
-$>npm install
+`ssed` requires Node.js v4+. First, [download](https://github.com/benas/ssed/releases) the latest release of `ssed` and run the following command:
+
+```js
+node ssed.js
 ```
 
-You can run `ssed` using `node ssed.js` or by making `ssed.js` executable:
+`ssed.js` is an executable script, you can also run it with:
 
 ```shell
-$>chmod +x ssed.js
 $>./ssed.js
 ```
 
 You may want to add `ssed` to your PATH or make an alias for it: `alias ssed='/path/to/ssed.js'`
 
 By default, `ssed` will start a server on port 3000. You can specify a different port as first parameter: `node ssed.js 9000`
+
+### Using Docker
+
+The [benas/ssed](https://hub.docker.com/r/benas/ssed/) image contains all dependencies to run `ssed`. First, pull the image with:
+
+```
+docker pull benas/ssed
+```
+
+Then, you can start `ssed` in a docker container:
+
+```
+docker run -i -p 3000:3000 benas/ssed
+```
+
+### Build from source
+
+To build `ssed` from sources, you need `npm`. Please run the following commands:
+
+```shell
+$>git clone https://github.com/benas/ssed.git
+$>cd ssed
+$>npm install
+```
 
 # Examples
 
