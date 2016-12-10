@@ -7,7 +7,7 @@ This makes it very easy to push data to browsers. What data to push and how to i
 
 ### Using Node
 
-`ssed` requires Node.js v4+. First, [download](https://github.com/benas/ssed/releases) the latest release of `ssed` and run the following command: `$> node ssed.js` .
+`ssed` requires Node.js v4+. [Download](https://github.com/benas/ssed/releases) the latest release of `ssed` and run the following command: `$> node ssed.js` .
 
 `ssed.js` is an executable script, you can also run it with: `$> ./ssed.js`
 
@@ -69,35 +69,46 @@ This is the simplest example of how to use `ssed`. It's not really useful, but j
 
 Let see some other useful examples.
 
-### Create a real time monitoring dashboard
+### Real time system monitoring dashboard
 
-The following command writes random numbers to the standard output every second.
-These numbers can be piped out to `ssed` and rendered in a real time chart:
+The following script (in `examples/system-stats/system-stats.sh)` gathers some statistics about system resources using the `top` command:
 
 ```shell
-$> while sleep 1; do echo $[ ( $RANDOM % 100 )  + 1 ]; done | ssed
+#!/usr/bin/env bash
+
+CPU=$(top -l 1 | grep "CPU usage" | awk '{print $3}' | tr '%' ' ')
+MEMORY=$(top -l 1 | grep "PhysMem" | awk '{print $2}' | tr 'M' ' ')
+PROCESSES=$(top -l 1 | grep "Processes" | awk '{print $2}')
+THREADS=$(top -l 1 | grep "Processes" | awk '{print $10}')
+
+echo "{\"cpu\": \"$CPU\", \"memory\": \"$MEMORY\", \"processes\": \"$PROCESSES\", \"threads\": \"$THREADS\"}";
 ```
 
-Run this command and open the `examples/random/index.html` file in a browser. You should see a chart with live data:
+Stats are written to the standard output in JSON format. Let's pipe them out to `ssed` every second:
 
-![screenshot-random](https://raw.githubusercontent.com/benas/ssed/master/examples/random/screenshot.png)
+```shell
+$> while sleep 1; do system-stats.sh; done | ssed
+```
 
-On the client side, we need to listen to server sent events and update the chart:
+Run this command and open the `examples/system-stats/index.html` file in a browser. You should see a chart with live data:
+
+![screenshot-system-stats](https://raw.githubusercontent.com/benas/ssed/master/examples/system-stats/screenshot.png)
+
+On the client side, server sent events are consumed and used to update charts:
 
 ```js
 var source = new EventSource("http://localhost:3000/");
 source.onmessage = function(event) {
-    updateChart(event.data);
+    var data = JSON.parse(event.data);
+    updateCharts(event.data);
 };
 ```
 
 As you can see, there is no need to create a server, just open the html file in a browser and you're done!
 
-In the example above, replace `echo $[ ( $RANDOM % 100 )  + 1 ]` with `cat /proc/meminfo | grep MemFree | awk '{print $2}'` (or something similar using `top` or `free` commands) and you'll get a live chart of memory usage.
-
 ### Docker dashboard
 
-The following script (in `examples/docker/docker-stats.sh`) gathers some statistics about docker engine:
+The following script (in `examples/docker/docker-stats.sh`) gathers some statistics about a running docker engine:
 
 ```shell
 #!/bin/bash
@@ -109,7 +120,7 @@ STOPPED=$(docker ps --filter status=exited | wc -l);
 echo "{\"images\": \"$IMAGES\", \"running\": \"$RUNNING\", \"stopped\": \"$STOPPED\"}";
 ```
 
-Stats are written to the standard output in JSON format. Let's pipe them out to `ssed`:
+Stats are written to the standard output in JSON format. Let's pipe them out to `ssed` every 10 seconds:
 
 ```shell
 $> while sleep 10; do docker-stats.sh ; done | ssed
@@ -130,53 +141,6 @@ source.onmessage = function(event) {
 This snippet from `examples/docker/index.html` will parse data and show it in the following dashboard:
 
 ![screenshot-docker](https://raw.githubusercontent.com/benas/ssed/master/examples/docker/screenshot.png)
-
-### Git statistics dashboard
-
-This example is the same idea as docker dashboard, but for git.
-The following script (in `examples/git/git-stats.sh`) gathers statistics from a git repository:
-
-```shell
-#!/bin/bash
-
-FOLDER=$1
-cd ${FOLDER}
-
-BRANCHES=$(git branch -a | wc -l);
-TAGS=$(git tag -l | wc -l);
-REVERTS=$(git log --oneline | grep 'revert' | wc -l);
-
-echo "{\"branches\": \"$BRANCHES\", \"tags\": \"$TAGS\", \"reverts\": \"$REVERTS\"}";
-```
-
-Stats are written to the standard output in JSON format and piped out to `ssed`:
-
-```shell
-$> while sleep 5; do git-stats.sh /Users/benas/dev/projects/github/ssed/; done | ssed
-```
-
-Reporting data is then consumed in a web page:
-
-```js
-var source = new EventSource("http://localhost:3000/");
-source.onmessage = function(event) {
-    var data = JSON.parse(event.data);
-    $('.branches').text( data.branches );
-    $('.tags').text( data.tags );
-    $('.reverts').text( data.reverts );
-};
-```
-
-This snippet from `examples/git/index.html` will parse data and show it in the following dashboard:
-
-![screenshot-git](https://raw.githubusercontent.com/benas/ssed/master/examples/git/screenshot.png)
-
-These stats are probably not relevant and used here just for demonstration purpose. But we can imagine a dashboard for a team with:
-
-* current features and bug-fixes branches (based on name pattern)
-* who is working on each branch
-* a live chart with git activities (last commits, branch creation/deletion, ..)
-* etc
 
 ### Stream logs to the browser
 

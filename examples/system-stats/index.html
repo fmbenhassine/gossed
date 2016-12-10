@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body { text-align: center; }
+    </style>
+    <script type="text/javascript" src="http://smoothiecharts.org/smoothie.js"></script>
+    <script type="text/javascript">
+        var cpu = new TimeSeries();
+        var memory = new TimeSeries();
+        var processes = new TimeSeries();
+        var threads = new TimeSeries();
+
+        var source = new EventSource("http://localhost:3000/");
+        source.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            cpu.append(new Date().getTime(), data.cpu);
+            memory.append(new Date().getTime(), data.memory);
+            processes.append(new Date().getTime(), data.processes);
+            threads.append(new Date().getTime(), data.threads);
+        };
+
+        function createCharts() {
+            var cpu_chart = new SmoothieChart();
+            cpu_chart.addTimeSeries(cpu, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+            cpu_chart.streamTo(document.getElementById("cpu"), 1000);
+
+            var memory_chart = new SmoothieChart();
+            memory_chart.addTimeSeries(memory, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+            memory_chart.streamTo(document.getElementById("memory"), 1000);
+
+            var ps_chart = new SmoothieChart({maxValue:500,minValue:50});
+            ps_chart.addTimeSeries(processes, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+            ps_chart.streamTo(document.getElementById("processes"), 1000);
+
+            var threads_chart = new SmoothieChart();
+            threads_chart.addTimeSeries(threads, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+            threads_chart.streamTo(document.getElementById("threads"), 1000);
+        }
+    </script>
+</head>
+<body onload="createCharts()">
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-6">
+            <h1>Cpu</h1>
+            <canvas id="cpu" width="400" height="100"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h1>Memory</h1>
+            <canvas id="memory" width="400" height="100"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-6">
+            <h1>Processes</h1>
+            <canvas id="processes" width="400" height="100"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h1>Threads</h1>
+            <canvas id="threads" width="400" height="100"></canvas>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
