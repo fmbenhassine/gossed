@@ -69,7 +69,7 @@ This is the simplest example of how to use `ssed`. It's not really useful, but j
 
 Let see some other useful examples.
 
-### Real time system monitoring dashboard
+### Create a real time system monitoring dashboard
 
 The following script (in `examples/system-stats/system-stats.sh)` gathers some statistics about system resources using the `top` command:
 
@@ -90,7 +90,7 @@ Stats are written to the standard output in JSON format. Let's pipe them out to 
 $> while sleep 1; do system-stats.sh; done | ssed
 ```
 
-Run this command and open the `examples/system-stats/index.html` file in a browser. You should see a chart with live data:
+Run this command and open the `examples/system-stats/index.html` file in a browser. You should see these charts with live data:
 
 ![screenshot-system-stats](https://raw.githubusercontent.com/benas/ssed/master/examples/system-stats/screenshot.png)
 
@@ -100,13 +100,13 @@ On the client side, server sent events are consumed and used to update charts:
 var source = new EventSource("http://localhost:3000/");
 source.onmessage = function(event) {
     var data = JSON.parse(event.data);
-    updateCharts(event.data);
+    updateCharts(data);
 };
 ```
 
 As you can see, there is no need to create a server, just open the html file in a browser and you're done!
 
-### Docker dashboard
+### Create a docker statistics dashboard
 
 The following script (in `examples/docker/docker-stats.sh`) gathers some statistics about a running docker engine:
 
@@ -152,34 +152,14 @@ $> tail -f server.log | ssed
 
 Cool! we've just implemented [logio](http://logio.org/) :smile:
 
-Try to run this command on a changing file in your system and open the `examples/log/index.html` file in a browser.
+Try to run this command on a changing file in your system and open the `examples/helloworld/index.html` file in a browser.
 You should see log events added in real time to the web page.
-
-# Use cases
-
-Now that you've got the idea, time to get your hands dirty! We can imagine any program _in any language_ that collects data on a regular interval,
-write it to the standard output and pipe it out to `ssed`. Here are some ideas:
-
-* display live Linux system stats (memory, CPU, IO, etc) in a pretty dashboard, just like [web-vmstats](https://github.com/joewalnes/web-vmstats)
-* track data from a database: running for example `mysql -e 'SELECT COUNT(*) FROM orders'` every few minutes and make a live dashboard of it
-* monitor Docker using [docker stats](https://docs.docker.com/engine/reference/commandline/stats/)
-* monitor ElasticSearch using [node stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
-* monitor MongoDB server using [mongo stats](https://docs.mongodb.com/v3.2/reference/method/db.stats/)
-* etc
-
-Your imagination is the limit!
-
-# Contributions
-
-You are welcome to contribute to the project with pull request on github.
-I'm really bad at web design! All I know is importing twitter bootstrap css and js files in a html file.
-If you can contribute an example of dashboard with cool widgets, I'll really appreciate your help! Many thanks upfront.
 
 # Credits
 
 * `ssed` is inspired by [websocketd](http://websocketd.com/)
 * `ssed` uses [sse-node](https://www.npmjs.com/package/sse-node) module to push server sent events to browsers.
-* The random numbers example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
+* The system resources example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
 
 # License
 
