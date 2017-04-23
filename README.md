@@ -46,7 +46,7 @@ In the following examples, we assume you have `gossed` command either:
 $> gossed
 ```
 
-Now, every message written to the console will be pushed as a server sent event (on port 3000 by default, but you can change it if you want with `-port=YourPort`).
+Now, every message written to the console will be pushed as a server sent event.
 Here is a html page to consume these events:
 
 ```html
@@ -169,8 +169,6 @@ You should see log events added in real time to the web page.
 * The system resources example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
 
 # License
-
-`gossed` is released under the [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT).
 
 ```
 The MIT License (MIT)
