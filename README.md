@@ -1,3 +1,7 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/benas/gossed)](https://goreportcard.com/report/github.com/benas/gossed)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT).
+[![Build Status](https://travis-ci.org/benas/gossed.svg?branch=master)](https://travis-ci.org/benas/gossed)
+
 # What is Gossed ?
 
 <img align="right" src="gossed.png" width="100"/>
