@@ -1,22 +1,22 @@
 # What is Gossed ?
 
-<img align="right" src="gossed.png" width="150">
+<img align="right" src="gossed.png" width="100"/>
 
 Gossed (Go Server Sent Events Daemon) is a small command-line tool written in go that turns data received on it's standard input into server sent events.
 This makes it very easy to push data to browsers. What data to push and how to interpret it in the browser is up to you.
 
 # How to use it?
 
-### Using pre-built binary
+### With pre-built binary
 
 First [download](https://github.com/benas/gossed/releases) `gossed` for your platform from and add it to your path.
 Then, run it from a command line:
 
 `$> gossed`
 
-By default, `gossed` will start a server on port 3000 but you can specify a different port with `-port=YourPort` option.
+By default, `gossed` will start a server on port `3000` but you can specify a different port with `-port=YourPort` option.
 
-### Using Docker
+### With Docker
 
 The [benas/gossed](https://hub.docker.com/r/benas/gossed/) image contains all you need to run `gossed` in a docker container.
 
@@ -158,7 +158,7 @@ You should see log events added in real time to the web page.
 # Credits
 
 * `gossed` is inspired by [websocketd](http://websocketd.com/).
-* `gossed` uses [go-sse](https://github.com/alexandrevicenzi/go-sse) module to push server sent events to browsers.
+* `gossed` uses [go-sse](https://github.com/alexandrevicenzi/go-sse) package to push server sent events to browsers.
 * The system resources example above uses [smoothie charts](http://smoothiecharts.org) to render the live chart.
 
 # License
