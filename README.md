@@ -1,13 +1,16 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/benas/gossed)](https://goreportcard.com/report/github.com/benas/gossed)
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT).
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/benas/gossed.svg?branch=master)](https://travis-ci.org/benas/gossed)
 
 # What is Gossed ?
 
-<img align="right" src="gossed.png" width="100"/>
+<img align="right" src="gossed.png" width="140"/>
 
 Gossed (Go Server Sent Events Daemon) is a small command-line tool written in go that turns data received on it's standard input into server sent events.
-This makes it very easy to push data to browsers. What data to push and how to interpret it in the browser is up to you.
+
+This makes it very easy to push data to browsers.
+
+What data to push and how to interpret it in the browser is up to you.
 
 # How to use it?
 
