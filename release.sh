@@ -16,6 +16,11 @@ function tag {
 }
 
 function build_binaries {
+
+    # save current GOOS and GOARCH
+    CURRENT_GOOS=${GOOS}
+    CURRENT_GOARCH=${GOARCH}
+
     echo "Building binaries for version ${VERSION}"
     for GOOS in darwin linux windows; do
         for GOARCH in 386 amd64; do
@@ -24,9 +29,20 @@ function build_binaries {
                 rm ${FILE}
             fi
             echo "Building ${FILE}"
+            export GOOS=${GOOS}
+            export GOARCH=${GOARCH}
             go build -o ${FILE}
+            if [ "${GOOS}" == "windows" ]; then
+               mv ${FILE} ${FILE}.exe
+            else
+               chmod +x ${FILE}
+            fi
         done
     done
+
+    # reset GOOS and GOARCH
+    export GOOS=${CURRENT_GOOS}
+    export GOARCH=${CURRENT_GOARCH}
     echo "Done"
 }
 
