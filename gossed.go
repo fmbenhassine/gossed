@@ -7,11 +7,15 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"io/ioutil"
+	"fmt"
 
 	"github.com/alexandrevicenzi/go-sse"
 )
 
 func main() {
+	log.SetOutput(ioutil.Discard)
+
 	port := flag.Int("port", 3000, "port on which events will be sent")
 	flag.Parse()
 
@@ -34,6 +38,6 @@ func main() {
 		}
 	}()
 
-	log.Println("Listening on port: " + strconv.Itoa(*port))
+	fmt.Println("Listening on port: " + strconv.Itoa(*port))
 	http.ListenAndServe(":"+strconv.Itoa(*port), nil)
 }
