@@ -16,7 +16,7 @@ What data to push and how to interpret it in the browser is up to you.
 
 ### With pre-built binary
 
-First [download](https://github.com/benas/gossed/releases) `gossed` for your platform from and add it to your path.
+First [download](https://github.com/benas/gossed/releases) `gossed` for your platform and add it to your path.
 Then, run it from a command line:
 
 `$> gossed`
@@ -40,7 +40,7 @@ In the following examples, we assume you have `gossed` command either:
 
 ### Hello world
 
-`gossed` reads messages from STDIN and pushes them as server sent events. So let's first start a `gossed` process:
+`gossed` reads messages from STDIN and pushes them as server sent events. So first, let's start a `gossed` process:
 
 ```shell
 $> gossed
@@ -94,10 +94,10 @@ echo "{\"cpu\": \"$CPU\", \"memory\": \"$MEMORY\", \"processes\": \"$PROCESSES\"
 Stats are written to the standard output in JSON format. Let's pipe them out to `gossed` every second:
 
 ```shell
-$> while sleep 1; do system-stats.sh; done | gossed
+$> while sleep 1; do ./system-stats.sh; done | gossed
 ```
 
-Run this command and open the `examples/system-stats/index.html` file in a browser. You should see these charts with live data:
+Run this command in the `examples/system-stats` directory and open the `examples/system-stats/index.html` file in a browser. You should see these charts with live data:
 
 ![screenshot-system-stats](https://raw.githubusercontent.com/benas/ssed/master/examples/system-stats/screenshot.png)
 
@@ -130,7 +130,7 @@ echo "{\"images\": \"$IMAGES\", \"running\": \"$RUNNING\", \"stopped\": \"$STOPP
 Stats are written to the standard output in JSON format. Let's pipe them out to `gossed` every 30 seconds:
 
 ```shell
-$> while sleep 30; do docker-stats.sh ; done | gossed
+$> while sleep 30; do ./docker-stats.sh ; done | gossed
 ```
 
 We can now consume these stats in a web page:
