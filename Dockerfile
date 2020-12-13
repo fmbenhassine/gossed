@@ -1,4 +1,4 @@
-FROM google/golang:stable
+FROM golang:latest
 MAINTAINER Mahmoud Ben Hassine <mahmoud.benhassine@icloud.com>
 RUN mkdir -p $GOPATH/src/gossed
 WORKDIR $GOPATH/src/gossed
