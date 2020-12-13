@@ -1,3 +1,4 @@
 release.sh linguist-vendored
+build.sh linguist-vendored
 examples/* linguist-vendored
 Dockerfile linguist-vendored
