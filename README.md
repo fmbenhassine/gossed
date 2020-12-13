@@ -14,7 +14,7 @@ What data to push and how to interpret it in the browser is up to you.
 
 # How to use it?
 
-### With pre-built binary
+### With a pre-built binary
 
 First [download](https://github.com/benas/gossed/releases) `gossed` for your platform and add it to your path.
 Then, run it from a command line:
@@ -74,7 +74,7 @@ Open this file in a browser and type some messages in the console, you should se
 
 This is the simplest example of how to use `gossed`. It's not really useful, but just to help you understand how it works.
 
-Let see some other useful examples.
+Let's see some other useful examples.
 
 ### Create a real time system monitoring dashboard
 
@@ -173,7 +173,7 @@ You should see log events added in real time to the web page.
 ```
 The MIT License (MIT)
 
-Copyright (c) 2017 Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+Copyright (c) 2020 Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
